@@ -12,8 +12,6 @@ m=0.000001;
 
 
 %Define variables
-R=binvar(n,g-1,5,5,'full');%transportation
-U=binvar(n,g,5,'full'); %assignment
 V=binvar(n,g,l,'full'); %speed
 W=binvar(n,n,g,5,'full'); %direct precedence
 X=binvar(n,g,'full'); %turn off
