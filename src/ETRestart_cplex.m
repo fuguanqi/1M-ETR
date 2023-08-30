@@ -1,5 +1,5 @@
 clc;clear;
-n=15;
+n=14;
 
 data=readmatrix (strcat('Test_Instances\',num2str(n),'_jobs.txt'));
 
@@ -79,7 +79,7 @@ Constraints=[Constraints, ...
 Objective = Z_ET+Z_R;
 
 % Set some options for YALMIP and solver
-options = sdpsettings('solver','cplex','verbose',4,'cplex.tilim',50);
+options = sdpsettings('solver','cplex','verbose',4,'cplex.timelimit',3000);
 % options.cplex.tilim=100;
 
 % Solve the problem
