@@ -3,7 +3,7 @@ function [optimum,EndTs] = ETRTimingByCPLEX(job_seq,data)
 %   Detailed explanation goes here
 TIME_MAX=9999;
 
-
+n=length(job_seq);
 p=data(:,1);
 d_minus=data(:,2);
 d_plus=data(:,3);
@@ -82,13 +82,13 @@ Constraints=[Constraints, ...
 Objective = Z_ET+Z_R;
 
 % Set some options for YALMIP and solver
-options = sdpsettings('solver','cplex','verbose',4);
+options = sdpsettings('solver','cplex','verbose',0);
 options.cplex.timelimit=100;
 
 % Solve the problem
-tic
+% tic
 sol = optimize(Constraints,Objective,options);
-solve_time=toc;
+% solve_time=toc;
 
 
 % Analyze error flags
