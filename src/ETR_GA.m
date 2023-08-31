@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2] = ETR_GA(n,data,TimingMethod)
+function res = ETR_GA(n,data,TimingMethod)
 
 Race_Number=200;        %种群数量
 Iteration=100;          %迭代次数

@@ -73,7 +73,7 @@ Data.S(:,Data.integer)=round(Data.S(:,Data.integer));
 save (strcat('problems\Data1.mat'));
 
 
-[xbest, fbest] = miso1('datainput_dp1',1000, 'rbf_c', [], 'slhd', 'cp1',[],Data); %SODA-ADM
+[xbest, fbest] = miso('datainput_dp',1000, 'rbf_c', [], 'slhd', 'cp4',[],Data); %SODA-ADM
 
-Data.save_name=strcat('soda1','_ans\prob_',num2str(n),'_',num2str(g), ...
+Data.save_name=strcat('sodaadm_ans\prob_',num2str(n),'_',num2str(g), ...
     '_',num2str(TAR),'_',num2str(RDD),'.mat');

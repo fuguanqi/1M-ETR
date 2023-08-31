@@ -1,5 +1,5 @@
 clc;clear;
-n=7;
+n=70;
 
 data=readmatrix (strcat('Test_Instances\',num2str(n),'_jobs.txt'));
 
@@ -11,10 +11,8 @@ data=readmatrix (strcat('Test_Instances\',num2str(n),'_jobs.txt'));
 % [dp_res,DP_endTs]=ETRTimingByDP(job_seq,data);
 
 
-
-ETR_GA(n,data,'CPLEX');
-
-
+% SODAADM_DP(n,data);
+ETR_GA(n,data,'DP');
 
 
 
