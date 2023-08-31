@@ -11,8 +11,8 @@ data=readmatrix (strcat('Test_Instances\',num2str(n),'_jobs.txt'));
 % [dp_res,DP_endTs]=ETRTimingByDP(job_seq,data);
 
 
-% SODAADM_DP(n,data);
-ETR_GA(n,data,'DP');
+SODAADM_DP(n,data);
+% ETR_GA(n,data,'DP');
 
 
 
