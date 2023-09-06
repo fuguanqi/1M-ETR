@@ -1,7 +1,7 @@
 
-function y=datainput_dp(xx) %objective function
+function y=datainput_dp(xx,data) %objective function
 x=xx'; % make sure vector is row vector
-load (strcat('temp_data\Data1.mat'));
+
 
 job_seq=[0,1,0];
 

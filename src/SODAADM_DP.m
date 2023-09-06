@@ -1,7 +1,8 @@
 function res = SODAADM_DP(n,data)
 
 Dim=n-1;
-
+Data.n=n;
+Data.data=data;
 Data.number_startpoints=2*(Dim+1);
 Data.dim=Dim;
 Data.xlow=[ones(1,Dim)];
@@ -28,13 +29,11 @@ end
 Data.S(:,Data.integer)=round(Data.S(:,Data.integer));
 
 
-save (strcat('temp_data\Data1.mat'));
+Iteration=min(n*10,5000);
+
+miso('datainput_dp',Iteration, 'rbf_c', [], 'slhd', 'cp4',[],Data); %SODA-ADM
 
 
-[xbest, fbest] = miso('datainput_dp',1000, 'rbf_c', [], 'slhd', 'cp4',[],Data); %SODA-ADM
-
-
-res=zeros(Iteration,2);
 
 end
 

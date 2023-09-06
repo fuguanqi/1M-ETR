@@ -202,10 +202,14 @@ Data.tol = 0.001*min(Data.xup-Data.xlow); %tolerance when 2 points are considere
 %% do expensive evaluations 
 Data.m=size(Data.S,1);
 Data.Y=zeros(Data.m,1);
+Data.cur_best=zeros(Data.m,1);
 Data.T = zeros(Data.m,1);
+fevalt = tic;
+pre_val=Inf;
 for ii = 1: Data.m
-    fevalt = tic;
-    Data.Y(ii)=feval(Data.objfunction, Data.S(ii,:));     %Data.Y(ii)=Data.objfunction(Data.S(ii,:));  
+    Data.Y(ii)=feval(Data.objfunction, Data.S(ii,:),Data.data);     %Data.Y(ii)=Data.objfunction(Data.S(ii,:));  
+    Data.cur_best(ii)=min(pre_val,Data.Y(ii));
+    pre_val=Data.cur_best(ii);
     Data.T(ii) = toc(fevalt);
 end
 [Data.fbest,fbest_ID]=min(Data.Y); %best function value so far
@@ -241,9 +245,16 @@ fbest = sol.fbest;
 sol.total_T = toc(TimeStart); %stop timer for optimization
 
 %% saving
+data_to_write=[];
+ii=1;
+while ii<maxeval
+    data_to_write(:,end+1)=[sol.cur_best(ii);sol.T(ii)];
+    ii=ii+5;
+end
+data_to_write(:,end+1)=[sol.cur_best(end);sol.T(end)];
+writematrix(data_to_write,strcat('soda_results/',num2str(Data.n),'_jobs.txt'),'WriteMode','append');
 
 
-toc
 
 end
     

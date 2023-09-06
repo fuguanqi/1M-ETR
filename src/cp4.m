@@ -31,7 +31,7 @@ cp.failctr = 0; % number of consecutive unsuccessful iterations
 cp.succctr=0; % number of consecutive successful iterations
 cp.count1=0;
 cp.weightpattern=[0.3,0.5,0.8,0.95]; %weight pattern for scoring candidate points
-
+fevalt = tic; 
 %% optimization iterations
 % while Data.m <  (Data.maxeval-3*Data.dim)  %do until budget of function evaluations exhausted 0.5* Data.maxeval
 while Data.m < Data.maxeval  %do until budget of function evaluations exhausted 
@@ -205,14 +205,16 @@ while Data.m < Data.maxeval  %do until budget of function evaluations exhausted
     end
     
     clear CandPoint;
-    fevalt = tic; %start timer for function evaluation
-    fnew = feval(Data.objfunction,xnew); %new function value                    %要改
-    timer = toc(fevalt); %stop timer for function evaluation
+    
+    fnew = feval(Data.objfunction,xnew,Data.data); %new function value                    %要改
+    
     Data.m=Data.m+1; %update the number of function evaluations
     m=Data.m;
     Data.S(Data.m,:)=xnew; %update sample site matrix with new point
     Data.Y(Data.m,1)=fnew; %update vector with function values
-    Data.T(Data.m,1) = timer; %update vector with evaluation times
+    Data.cur_best(Data.m,1)=min(Data.cur_best(Data.m-1,1),fnew);
+
+   
 
     if fnew < Data.fbest %update best point found so far if necessary
         if (Data.fbest - fnew) > (1e-3)*abs(Data.fbest)
@@ -279,7 +281,7 @@ while Data.m < Data.maxeval  %do until budget of function evaluations exhausted
         cp.succctr=0;
         cp.count1=0;
     end    
-    
+     Data.T(Data.m,1) = toc(fevalt); %update vector with evaluation times
 end
 
 %% -------逐维扰动---------%
