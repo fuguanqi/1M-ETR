@@ -29,9 +29,10 @@ end
 data_to_write=[];
 ii=1;
 while ii<Iteration
-    data_to_write(:,end+1)=res(:,t);
+    data_to_write(:,end+1)=res(:,ii);
     ii=ii+5;
 end
+
 data_to_write(:,end+1)=res(:,end);
 writematrix(data_to_write,strcat('ga_results/',num2str(n),'_jobs.txt'),'WriteMode','append');
 end
